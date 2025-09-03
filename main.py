@@ -400,16 +400,23 @@ def main():
     else:
         st.info("No threats match the selected filters.")
     
-    # Footer with POC info
     st.markdown("---")
     st.markdown("""
-    **POC Status**: This is a proof-of-concept demonstration showing core TIP functionality:
-    - ✅ Multi-source threat feed ingestion
-    - ✅ Business context-aware risk scoring  
-    - ✅ Executive reporting dashboard
-    - ✅ Actionable threat prioritization
-    - 🔄 Next: Automated blocking integration, compliance reporting
+    **🔴 LIVE DATA**: This POC is now pulling real threat intelligence from:
+    - ✅ **Abuse.ch URLhaus**: Live malicious URLs and domains
+    - ✅ **CISA KEV**: Known Exploited Vulnerabilities (actively targeted)
+    - ✅ **Abuse.ch MalwareBazaar**: Recent malware samples and hashes
+    - 🔄 **Business Context**: Smart relevance scoring based on your company profile
+    - 📊 **Executive Reporting**: Clean dashboards for non-technical stakeholders
     """)
+    
+    # Show data freshness
+    if st.session_state.last_update:
+        minutes_ago = int((datetime.now() - st.session_state.last_update).total_seconds() / 60)
+        if minutes_ago < 1:
+            st.info("🕐 Data refreshed less than 1 minute ago")
+        else:
+            st.info(f"🕐 Data refreshed {minutes_ago} minutes ago")
 
 if __name__ == "__main__":
     main()
