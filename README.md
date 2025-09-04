@@ -1,2 +1,1 @@
-# CTI-Omiqa
-CTI / TMP
+#CTI / TMP
