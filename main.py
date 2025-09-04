@@ -244,6 +244,16 @@ def main():
         st.session_state.threats_data = tip.generate_mock_data()
         st.session_state.last_update = datetime.now()
     
+    # Show data sources summary for debugging
+    if threats:
+        sources_summary = {}
+        for threat in threats:
+            source = threat.get('source', 'Unknown')
+            sources_summary[source] = sources_summary.get(source, 0) + 1
+        
+        st.info(f"**Data Sources Currently Loaded:** " + 
+                ", ".join([f"{source} ({count})" for source, count in sources_summary.items()]))
+    
     # Executive Dashboard
     st.header("📊 Executive Dashboard")
     
